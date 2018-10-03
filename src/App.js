@@ -70,9 +70,18 @@ class App extends Component {
         <div className='container'>
           <section className='add-item'>
               <form onSubmit={this.handleSubmit}>
-                <input type="text" name="username" placeholder="What's your name?" onChange={this.handleChange} value={this.state.username} />
-                <input type="text" name="currentItem" placeholder="What are you bringing?" onChange={this.handleChange} value={this.state.currentItem} />
-                <button>RSVP to Invite Dinner</button>
+                      <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                      <div class="btn-group" role="group">
+                        <button id="before_event" type="button" class="btn btn-default" onClick={function() { document.getElementById('before_event').style.opacity="1"; document.getElementById('after_event').style.opacity="0.8"; document.getElementById("post_picture").hidden=true; document.getElementById("dinner_photo").type="hidden"; document.getElementById("caption").type="hidden"; document.getElementById("rsvp").hidden=false; document.getElementById("username").type="text"; document.getElementById("currentItem").type="text";}}>Before Event</button>
+                        <button id="after_event" type="button" class="btn btn-default" onClick={function() { document.getElementById('before_event').style.opacity="0.8"; document.getElementById('after_event').style.opacity="1"; document.getElementById("post_picture").hidden=false; document.getElementById("dinner_photo").type="file"; document.getElementById("caption").type="text"; document.getElementById("rsvp").hidden=true; document.getElementById("username").type="hidden"; document.getElementById("currentItem").type="hidden"; }}>After Event</button>
+                      </div>
+                    </div>
+                <input type="text" id="username" name="username" placeholder="What's your name?" onChange={this.handleChange} value={this.state.username} />
+                <input type="text" id="currentItem" name="currentItem" placeholder="What are you bringing?" onChange={this.handleChange} value={this.state.currentItem} />
+                <button id="rsvp">RSVP to Invite Dinner</button>
+                <input type="hidden" id="dinner_photo" name="dinner_photo" placeholder="Attach Photo Here" onChange={this.handleChange} value={this.state.username} />
+                <input type="hidden" id="caption" name="caption" placeholder="Want to add a caption?" onChange={this.handleChange} value={this.state.currentItem} />
+                <button id="post_picture" hidden>Post Picture</button>
               </form>
           </section>
           <section className='display-item'>
