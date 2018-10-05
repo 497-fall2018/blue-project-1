@@ -55,7 +55,7 @@ class App extends Component {
 
   const captionsRef = firebase.database().ref('picturefeed');
   const picture = {
-    photo: this.state.photo,
+    photo: this.state.avatarURL,
     caption: this.state.caption,
   }
 
@@ -100,12 +100,13 @@ class App extends Component {
     for (let picf in picturefeeds) {
       picState.push({
         id: picf,
-        photo: picturefeeds[picf].photo,
+        photo: this.state.avatarURL,
         caption: picturefeeds[picf].caption,
       });
     }
     this.setState({
-      picturefeeds: picState
+      picturefeeds: picState,
+      avatarURL: '',
     });
   });
 
