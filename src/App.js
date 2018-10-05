@@ -26,12 +26,14 @@ class App extends Component {
   const itemsRef = firebase.database().ref('items');
   const item = {
     title: this.state.currentItem,
-    user: this.state.username
+    user: this.state.username,
+    caption: this.state.caption
   }
   itemsRef.push(item);
   this.setState({
     currentItem: '',
-    username: ''
+    username: '',
+    caption: '',
   });
   }
 
@@ -44,7 +46,8 @@ class App extends Component {
       newState.push({
         id: item,
         title: items[item].title,
-        user: items[item].user
+        user: items[item].user,
+        caption: items[item].caption
       });
     }
     this.setState({
@@ -73,7 +76,7 @@ class App extends Component {
                       <div class="btn-group btn-group-justified" role="group" aria-label="...">
                       <div class="btn-group" role="group">
                         <button id="before_event" type="button" class="btn btn-default" onClick={function() { document.getElementById('before_event').style.opacity="1"; document.getElementById('after_event').style.opacity="0.8"; document.getElementById("post_picture").hidden=true; document.getElementById("dinner_photo").type="hidden"; document.getElementById("caption").type="hidden"; document.getElementById("rsvp").hidden=false; document.getElementById("username").type="text"; document.getElementById("currentItem").type="text";}}>Before Event</button>
-                        <button id="after_event" type="button" class="btn btn-default" onClick={function() { document.getElementById('before_event').style.opacity="0.8"; document.getElementById('after_event').style.opacity="1"; document.getElementById("post_picture").hidden=false; document.getElementById("dinner_photo").type="file"; document.getElementById("caption").type="text"; document.getElementById("rsvp").hidden=true; document.getElementById("username").type="hidden"; document.getElementById("currentItem").type="hidden"; }}>After Event</button>
+                        <button id="after_event" type="button" class="btn btn-default" onClick={function() { document.getElementById('before_event').style.opacity="0.8"; document.getElementById('after_event').style.opacity="1"; document.getElementById("post_picture").hidden=false; document.getElementById("dinner_photo").type="file"; document.getElementById("caption").type="text"; document.getElementById("rsvp").hidden=true; document.getElementById("username").type="hidden"; document.getElementById("currentItem").type="hidden"; document.getElementById("item_list").hidden=true; document.getElementById("caption").contentEditable=true; }}>After Event</button>
                       </div>
                     </div>
                 <input type="text" id="username" name="username" placeholder="What's your name?" onChange={this.handleChange} value={this.state.username} />
@@ -85,7 +88,7 @@ class App extends Component {
               </form>
           </section>
           <section className='display-item'>
-            <div className='wrapper'>
+            <div id="item_list" className='wrapper'>
               <ul>
                 {this.state.items.map((item) => {
                 return (
