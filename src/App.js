@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import firebase from './firebase.js';
+import FileUploader from 'react-firebase-file-uploader';
 
 class App extends Component {
   constructor() {
@@ -13,10 +14,30 @@ class App extends Component {
       photo: '',
       caption: '',
       picturefeeds: [],
+      avatarURL: '',
+      avatar: '',
+      isUploading: false,
+      progress: 0,
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  handleChangeUsername = (event) => this.setState({username: event.target.value});
+  handleUploadStart = () => this.setState({isUploading: true, progress: 0});
+  handleProgress = (progress) => this.setState({progress});
+  handleUploadError = (error) => {
+  this.setState({isUploading: false});
+  console.error(error);
+  }
+
+  handleUploadSuccess = (filename) => {
+  console.log("running handleUploadSuccess!!");
+  this.setState({avatar: filename, progress: 100, isUploading: false});
+  firebase.storage().ref('picturefeed').child(filename).getDownloadURL().then(url => this.setState({avatarURL: url}));
+  console.log("finished handleUploadSuccess!!");
+  };
+
 
   handleChange(e) {
   this.setState({
@@ -55,7 +76,7 @@ class App extends Component {
 
   componentDidMount() {
   const itemsRef = firebase.database().ref('items');
-  const captionsRef = firebase.database().ref('picturefeeds');
+  const captionsRef = firebase.database().ref('picturefeed');
 
 
   itemsRef.on('value', (snapshot) => {
@@ -117,7 +138,19 @@ class App extends Component {
                 <input type="text" id="username" name="username" placeholder="What's your name?" onChange={this.handleChange} value={this.state.username} />
                 <input type="text" id="currentItem" name="currentItem" placeholder="What are you bringing?" onChange={this.handleChange} value={this.state.currentItem} />
                 <button id="rsvp">RSVP to Invite Dinner</button>
-                <input type="hidden" id="dinner_photo" name="dinner_photo" onChange={this.handleChange} value={this.state.photo} />
+                
+                {this.state.isUploading &&
+                <p>Progress: {this.state.progress}</p>
+                }
+                {this.state.avatarURL}
+
+                <FileUploader type="hidden" id="dinner_photo" name="dinner_photo" accept="image/*"
+                  randomizeFilename
+                  storageRef={firebase.storage().ref('picturefeed')}
+                  onUploadStart={this.handleUploadStart}
+                  onUploadError={this.handleUploadError}
+                  onUploadSuccess={this.handleUploadSuccess}
+                  onProgress={this.handleProgress} />
                 <input type="hidden" id="caption" name="caption" placeholder="Want to add a caption?" onChange={this.handleChange} value={this.state.caption} />
                 <button id="post_picture" hidden>Post Picture</button>
               </form>
