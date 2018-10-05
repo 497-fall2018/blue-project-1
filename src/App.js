@@ -9,7 +9,10 @@ class App extends Component {
     this.state={
       currentItem: '',
       username: '',
-      items: []
+      items: [],
+      photo: '',
+      caption: '',
+      picturefeeds: [],
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,18 +30,34 @@ class App extends Component {
   const item = {
     title: this.state.currentItem,
     user: this.state.username,
-    caption: this.state.caption
   }
+
+  const captionsRef = firebase.database().ref('picturefeed');
+  const picture = {
+    photo: this.state.photo,
+    caption: this.state.caption,
+  }
+
+
   itemsRef.push(item);
   this.setState({
     currentItem: '',
     username: '',
+  });
+
+
+  captionsRef.push(picture);
+  this.setState ({
+    photo: '',
     caption: '',
   });
   }
 
   componentDidMount() {
   const itemsRef = firebase.database().ref('items');
+  const captionsRef = firebase.database().ref('picturefeeds');
+
+
   itemsRef.on('value', (snapshot) => {
     let items = snapshot.val();
     let newState = [];
@@ -47,13 +66,29 @@ class App extends Component {
         id: item,
         title: items[item].title,
         user: items[item].user,
-        caption: items[item].caption
       });
     }
     this.setState({
       items: newState
     });
   });
+
+   captionsRef.on('value', (snapshot) => {
+    let picturefeeds = snapshot.val();
+    let picState = [];
+    for (let picf in picturefeeds) {
+      picState.push({
+        id: picf,
+        photo: picturefeeds[picf].photo,
+        caption: picturefeeds[picf].caption,
+      });
+    }
+    this.setState({
+      picturefeeds: picState
+    });
+  });
+
+
   }
 
   removeItem(itemId) {
@@ -76,14 +111,14 @@ class App extends Component {
                       <div class="btn-group btn-group-justified" role="group" aria-label="...">
                       <div class="btn-group" role="group">
                         <button id="before_event" type="button" class="btn btn-default" onClick={function() { document.getElementById('before_event').style.opacity="1"; document.getElementById('after_event').style.opacity="0.8"; document.getElementById("post_picture").hidden=true; document.getElementById("dinner_photo").type="hidden"; document.getElementById("caption").type="hidden"; document.getElementById("rsvp").hidden=false; document.getElementById("username").type="text"; document.getElementById("currentItem").type="text";}}>Before Event</button>
-                        <button id="after_event" type="button" class="btn btn-default" onClick={function() { document.getElementById('before_event').style.opacity="0.8"; document.getElementById('after_event').style.opacity="1"; document.getElementById("post_picture").hidden=false; document.getElementById("dinner_photo").type="file"; document.getElementById("caption").type="text"; document.getElementById("rsvp").hidden=true; document.getElementById("username").type="hidden"; document.getElementById("currentItem").type="hidden"; document.getElementById("item_list").hidden=true; document.getElementById("caption").contentEditable=true; }}>After Event</button>
+                        <button id="after_event" type="button" class="btn btn-default" onClick={function() { document.getElementById('before_event').style.opacity="0.8"; document.getElementById('after_event').style.opacity="1"; document.getElementById("post_picture").hidden=false; document.getElementById("dinner_photo").type="file"; document.getElementById("caption").type="text"; document.getElementById("rsvp").hidden=true; document.getElementById("username").type="hidden"; document.getElementById("currentItem").type="hidden"; document.getElementById("item_list").hidden=true; }}>After Event</button>
                       </div>
                     </div>
                 <input type="text" id="username" name="username" placeholder="What's your name?" onChange={this.handleChange} value={this.state.username} />
                 <input type="text" id="currentItem" name="currentItem" placeholder="What are you bringing?" onChange={this.handleChange} value={this.state.currentItem} />
                 <button id="rsvp">RSVP to Invite Dinner</button>
-                <input type="hidden" id="dinner_photo" name="dinner_photo" placeholder="Attach Photo Here" onChange={this.handleChange} value={this.state.username} />
-                <input type="hidden" id="caption" name="caption" placeholder="Want to add a caption?" onChange={this.handleChange} value={this.state.currentItem} />
+                <input type="hidden" id="dinner_photo" name="dinner_photo" onChange={this.handleChange} value={this.state.photo} />
+                <input type="hidden" id="caption" name="caption" placeholder="Want to add a caption?" onChange={this.handleChange} value={this.state.caption} />
                 <button id="post_picture" hidden>Post Picture</button>
               </form>
           </section>
