@@ -116,6 +116,10 @@ class App extends Component {
   removeItem(itemId) {
   const itemRef = firebase.database().ref(`/items/${itemId}`);
   itemRef.remove();
+
+  const captionsRef = firebase.database().ref(`/picturefeed/${itemId}`);
+  captionsRef.remove();
+
   }
 
   render() {
@@ -170,6 +174,25 @@ class App extends Component {
                 })}
               </ul>
             </div>
+
+            <div id="newsfeed" className='wrapper'>
+              <ul>
+                {this.state.picturefeeds.map((picture) => {
+                return (
+                  <li key={picture.id}>
+                    <img src={picture.photo} height="150" width="250"/>
+                    <p>Caption: {picture.caption}</p>
+                    <button onClick={() => this.removeItem(picture.id)}>Remove Item</button>
+                  </li>
+                  )
+                })}
+              </ul>
+            </div>
+
+
+
+
+
           </section>
         </div>
       </div>
