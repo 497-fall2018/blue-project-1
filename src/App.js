@@ -77,6 +77,7 @@ class App extends Component {
   componentDidMount() {
   const itemsRef = firebase.database().ref('items');
   const captionsRef = firebase.database().ref('picturefeed');
+  console.log("componentDidMount called!");
 
 
   itemsRef.on('value', (snapshot) => {
@@ -95,12 +96,13 @@ class App extends Component {
   });
 
    captionsRef.on('value', (snapshot) => {
+     console.log("componentDidMount called for picturefeeds!");
     let picturefeeds = snapshot.val();
     let picState = [];
     for (let picf in picturefeeds) {
       picState.push({
         id: picf,
-        photo: this.state.avatarURL,
+        photo: picturefeeds[picf].photo,
         caption: picturefeeds[picf].caption,
       });
     }
@@ -136,8 +138,8 @@ class App extends Component {
               <form onSubmit={this.handleSubmit}>
                       <div class="btn-group btn-group-justified" role="group" aria-label="...">
                       <div class="btn-group" role="group">
-                        <button id="before_event" type="button" class="btn btn-default" onClick={function() { document.getElementById('before_event').style.opacity="1"; document.getElementById('after_event').style.opacity="0.8"; document.getElementById("post_picture").hidden=true; document.getElementById("dinner_photo").type="hidden"; document.getElementById("caption").type="hidden"; document.getElementById("rsvp").hidden=false; document.getElementById("username").type="text"; document.getElementById("currentItem").type="text";}}>Before Event</button>
-                        <button id="after_event" type="button" class="btn btn-default" onClick={function() { document.getElementById('before_event').style.opacity="0.8"; document.getElementById('after_event').style.opacity="1"; document.getElementById("post_picture").hidden=false; document.getElementById("dinner_photo").type="file"; document.getElementById("caption").type="text"; document.getElementById("rsvp").hidden=true; document.getElementById("username").type="hidden"; document.getElementById("currentItem").type="hidden"; document.getElementById("item_list").hidden=true; }}>After Event</button>
+                        <button id="before_event" type="button" class="btn btn-default" onClick={function() { document.getElementById('before_event').style.opacity="1"; document.getElementById('after_event').style.opacity="0.8"; document.getElementById("post_picture").hidden=true; document.getElementById("dinner_photo").type="hidden"; document.getElementById("caption").type="hidden"; document.getElementById("rsvp").hidden=false; document.getElementById("username").type="text"; document.getElementById("currentItem").type="text"; document.getElementById("photofeed").hidden=true; document.getElementById("item_list").hidden=false;}}>Before Event</button>
+                        <button id="after_event" type="button" class="btn btn-default" onClick={function() { document.getElementById('before_event').style.opacity="0.8"; document.getElementById('after_event').style.opacity="1"; document.getElementById("post_picture").hidden=false; document.getElementById("dinner_photo").type="file"; document.getElementById("caption").type="text"; document.getElementById("rsvp").hidden=true; document.getElementById("username").type="hidden"; document.getElementById("currentItem").type="hidden"; document.getElementById("item_list").hidden=true; document.getElementById("photofeed").hidden=false; }}>After Event</button>
                       </div>
                     </div>
                 <input type="text" id="username" name="username" placeholder="What's your name?" onChange={this.handleChange} value={this.state.username} />
@@ -175,7 +177,7 @@ class App extends Component {
               </ul>
             </div>
 
-            <div id="newsfeed" className='wrapper'>
+            <div hidden id="photofeed" className='wrapper'>
               <ul>
                 {this.state.picturefeeds.map((picture) => {
                 return (
