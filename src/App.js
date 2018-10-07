@@ -59,19 +59,21 @@ class App extends Component {
     caption: this.state.caption,
   }
 
+  if(this.state.currentItem !== '' || this.state.username !== ''){
+    itemsRef.push(item);
+    this.setState({
+      currentItem: '',
+      username: '',
+    });
+  }
 
-  itemsRef.push(item);
-  this.setState({
-    currentItem: '',
-    username: '',
-  });
-
-
-  captionsRef.push(picture);
-  this.setState ({
-    photo: '',
-    caption: '',
-  });
+  if(this.state.avatarURL !== '' || this.state.caption !== ''){
+    captionsRef.push(picture);
+    this.setState ({
+      photo: '',
+      caption: '',
+    });
+  }
   }
 
   componentDidMount() {
@@ -138,12 +140,40 @@ class App extends Component {
               <form onSubmit={this.handleSubmit}>
                       <div class="btn-group btn-group-justified" role="group" aria-label="...">
                       <div class="btn-group" role="group">
-                        <button id="before_event" type="button" class="btn btn-default" onClick={function() { document.getElementById('before_event').style.opacity="1"; document.getElementById('after_event').style.opacity="0.8"; document.getElementById("post_picture").hidden=true; document.getElementById("dinner_photo").type="hidden"; document.getElementById("caption").type="hidden"; document.getElementById("rsvp").hidden=false; document.getElementById("username").type="text"; document.getElementById("currentItem").type="text"; document.getElementById("photofeed").hidden=true; document.getElementById("item_list").hidden=false;}}>Before Event</button>
-                        <button id="after_event" type="button" class="btn btn-default" onClick={function() { document.getElementById('before_event').style.opacity="0.8"; document.getElementById('after_event').style.opacity="1"; document.getElementById("post_picture").hidden=false; document.getElementById("dinner_photo").type="file"; document.getElementById("caption").type="text"; document.getElementById("rsvp").hidden=true; document.getElementById("username").type="hidden"; document.getElementById("currentItem").type="hidden"; document.getElementById("item_list").hidden=true; document.getElementById("photofeed").hidden=false; }}>After Event</button>
+                        <button id="before_event" type="button" class="btn btn-default"
+                         onClick={
+                          function() { 
+                            document.getElementById('before_event').style.opacity="1";
+                             document.getElementById('after_event').style.opacity="0.8";
+                              document.getElementById("post_picture").hidden=true; 
+                              document.getElementById("dinner_photo").type="hidden"; 
+                              document.getElementById("caption").type="hidden"; 
+                              document.getElementById("rsvp").hidden=false;
+                               document.getElementById("username").type="text"; 
+                               document.getElementById("currentItem").type="text"; 
+                               document.getElementById("photofeed").hidden=true;
+                                document.getElementById("item_list").hidden=false;}
+                              }>Before Event</button>
+                        <button id="after_event" type="button" class="btn btn-default" 
+                        onClick={
+                          function() { 
+                            document.getElementById('before_event').style.opacity="0.8"; 
+                            document.getElementById('after_event').style.opacity="1"; 
+                            document.getElementById("post_picture").hidden=false; 
+                            document.getElementById("dinner_photo").type="file"; 
+                            document.getElementById("caption").type="text"; 
+                            document.getElementById("rsvp").hidden=true;
+                            document.getElementById("username").type="hidden"; 
+                            document.getElementById("currentItem").type="hidden"; 
+                            document.getElementById("item_list").hidden=true; 
+                            document.getElementById("photofeed").hidden=false; }
+                          }>After Event</button>
                       </div>
                     </div>
-                <input type="text" id="username" name="username" placeholder="What's your name?" onChange={this.handleChange} value={this.state.username} />
-                <input type="text" id="currentItem" name="currentItem" placeholder="What are you bringing?" onChange={this.handleChange} value={this.state.currentItem} />
+                <input type="text" id="username" name="username" placeholder="What's your name?" 
+                onChange={this.handleChange} value={this.state.username} />
+                <input type="text" id="currentItem" name="currentItem" placeholder="What are you bringing?" 
+                onChange={this.handleChange} value={this.state.currentItem} />
                 <button id="rsvp">RSVP to Invite Dinner</button>
                 
                 {this.state.isUploading &&
@@ -158,7 +188,8 @@ class App extends Component {
                   onUploadError={this.handleUploadError}
                   onUploadSuccess={this.handleUploadSuccess}
                   onProgress={this.handleProgress} />
-                <input type="hidden" id="caption" name="caption" placeholder="Want to add a caption?" onChange={this.handleChange} value={this.state.caption} />
+                <input type="hidden" id="caption" name="caption" placeholder="Want to add a caption?" 
+                onChange={this.handleChange} value={this.state.caption} />
                 <button id="post_picture" hidden>Post Picture</button>
               </form>
           </section>
