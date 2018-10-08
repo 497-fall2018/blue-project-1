@@ -30,28 +30,52 @@
 
 body {
   font-family: 'Open Sans', sans-serif;
-  background-color: #fff;
+  /* background-color: #fff; */
+  /* background-image: url("./img/dinner2.jpg"); */
+  background-repeat: no-repeat;
+  background-size: container;
+  height: 100%;
+}
+
+body {
+  -webkit-animation: background 10s linear 5s infinite;
+  animation: background 10s linear 5s infinite;
+}
+
+@-webkit-keyframes background {
+  0% {   background-image: url("./img/dinner2.jpg"); }
+  33% {   background-image: url("./img/dinner3.jpg"); }
+  67% {   background-image: url("./img/dinner2.jpg"); }
+  100% {   background-image: url("./img/dinner3.jpg"); }
+}
+
+@keyframes background {
+  0% {   background-image: url("./img/dinner2.jpg"); }
+  33% {   background-image: url("./img/dinner3.jpg"); }
+  67% {   background-image: url("./img/dinner2.jpg"); }
+  100% {   background-image: url("./img/dinner3.jpg"); }
 }
 
 header {
   color: #fff;
-  background-color: #103D5D;
+  /* background-color: #103D5D; */
   padding: 33px 0 25px 15px;
 }
 
 header h1 {
-  font-size: 25px;
-  font-weight: 600;
+  font-size: 54px;
+  font-weight: 100;
   letter-spacing: 0.3px;
-  display: inline-block;
+  /* display: inline-block; */
   margin: 0;
   vertical-align: middle;
-  
+  text-align: center;
+  font-family: "Krub";
 }
 
 .fa {
   font-size: 22px;
-  transform: translateY(50deg);  
+  transform: translateY(50deg);
 }
 
 header i {
@@ -78,7 +102,7 @@ header i {
   background-color: rgb(237, 237, 237);
   padding: 60px 18px;
   box-shadow: 0 3px 4px 0 rgba(0,0,0,.14), 0 3px 3px -2px rgba(0,0,0,.12), 0 1px 8px 0 rgba(0,0,0,.2);
-  margin-bottom: 34px;  
+  margin-bottom: 34px;
   width: 25%;
   margin-right: auto;
 }
@@ -107,7 +131,7 @@ input {
   margin-bottom: 17px;
   border: 0;
   display: block;
-  width: 100%;  
+  width: 100%;
 }
 
 ul {
