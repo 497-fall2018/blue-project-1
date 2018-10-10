@@ -6,3 +6,11 @@ Blue team's "InviteDinner"
 * Sumin You
 * Lingyun Li
 * Nachammai Lakshmanan
+
+
+To run, please install the following dependencies:
+
+```
+npm installe react-firebase-file-uploader
+yarn add firebase --dev
+```
