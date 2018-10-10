@@ -70,6 +70,7 @@ class App extends Component {
         </header>
         <div className='container'>
           <section className='add-item'>
+              <h4>RSVP</h4>
               <form onSubmit={this.handleSubmit}>
                 <input type="text" name="username" placeholder="What's your name?" onChange={this.handleChange} value={this.state.username} />
                 <input type="text" name="currentItem" placeholder="What are you bringing?" onChange={this.handleChange} value={this.state.currentItem} />
