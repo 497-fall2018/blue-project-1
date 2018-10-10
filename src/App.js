@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 import firebase from './firebase.js';
 
+
 class App extends Component {
   constructor() {
     super();
@@ -63,8 +64,8 @@ class App extends Component {
       <div className='app'>
         <header>
             <div className='wrapper'>
-              <h1>InviteDinner (Project 1 by Blue Team)</h1>
-              
+              <h1>InviteDinner</h1>
+              <hr></hr>
             </div>
         </header>
         <div className='container'>
