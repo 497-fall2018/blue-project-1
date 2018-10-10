@@ -11,6 +11,6 @@ Blue team's "InviteDinner"
 To run, please install the following dependencies:
 
 ```
-npm installe react-firebase-file-uploader
+npm install react-firebase-file-uploader
 yarn add firebase --dev
 ```
