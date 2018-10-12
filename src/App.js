@@ -132,7 +132,7 @@ class App extends Component {
         <header>
             <div className='wrapper'>
               <h1>InviteDinner (Project 1 by Blue Team)</h1>
-              
+              <hr></hr>
             </div>
         </header>
         <div className='container'>
@@ -142,40 +142,40 @@ class App extends Component {
                       <div class="btn-group" role="group">
                         <button id="before_event" type="button" class="btn btn-default"
                          onClick={
-                          function() { 
+                          function() {
                             document.getElementById('before_event').style.opacity="1";
                              document.getElementById('after_event').style.opacity="0.8";
-                              document.getElementById("post_picture").hidden=true; 
-                              document.getElementById("dinner_photo").type="hidden"; 
-                              document.getElementById("caption").type="hidden"; 
+                              document.getElementById("post_picture").hidden=true;
+                              document.getElementById("dinner_photo").type="hidden";
+                              document.getElementById("caption").type="hidden";
                               document.getElementById("rsvp").hidden=false;
-                               document.getElementById("username").type="text"; 
-                               document.getElementById("currentItem").type="text"; 
+                               document.getElementById("username").type="text";
+                               document.getElementById("currentItem").type="text";
                                document.getElementById("photofeed").hidden=true;
                                 document.getElementById("item_list").hidden=false;}
                               }>Before Event</button>
-                        <button id="after_event" type="button" class="btn btn-default" 
+                        <button id="after_event" type="button" class="btn btn-default"
                         onClick={
-                          function() { 
-                            document.getElementById('before_event').style.opacity="0.8"; 
-                            document.getElementById('after_event').style.opacity="1"; 
-                            document.getElementById("post_picture").hidden=false; 
-                            document.getElementById("dinner_photo").type="file"; 
-                            document.getElementById("caption").type="text"; 
+                          function() {
+                            document.getElementById('before_event').style.opacity="0.8";
+                            document.getElementById('after_event').style.opacity="1";
+                            document.getElementById("post_picture").hidden=false;
+                            document.getElementById("dinner_photo").type="file";
+                            document.getElementById("caption").type="text";
                             document.getElementById("rsvp").hidden=true;
-                            document.getElementById("username").type="hidden"; 
-                            document.getElementById("currentItem").type="hidden"; 
-                            document.getElementById("item_list").hidden=true; 
+                            document.getElementById("username").type="hidden";
+                            document.getElementById("currentItem").type="hidden";
+                            document.getElementById("item_list").hidden=true;
                             document.getElementById("photofeed").hidden=false; }
                           }>After Event</button>
                       </div>
                     </div>
-                <input type="text" id="username" name="username" placeholder="What's your name?" 
+                <input type="text" id="username" name="username" placeholder="What's your name?"
                 onChange={this.handleChange} value={this.state.username} />
-                <input type="text" id="currentItem" name="currentItem" placeholder="What are you bringing?" 
+                <input type="text" id="currentItem" name="currentItem" placeholder="What are you bringing?"
                 onChange={this.handleChange} value={this.state.currentItem} />
                 <button id="rsvp">RSVP to Invite Dinner</button>
-                
+
                 {this.state.isUploading &&
                 <p>Progress: {this.state.progress}</p>
                 }
@@ -188,7 +188,7 @@ class App extends Component {
                   onUploadError={this.handleUploadError}
                   onUploadSuccess={this.handleUploadSuccess}
                   onProgress={this.handleProgress} />
-                <input type="hidden" id="caption" name="caption" placeholder="Want to add a caption?" 
+                <input type="hidden" id="caption" name="caption" placeholder="Want to add a caption?"
                 onChange={this.handleChange} value={this.state.caption} />
                 <button id="post_picture" hidden>Post Picture</button>
               </form>

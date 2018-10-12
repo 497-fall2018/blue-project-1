@@ -104,7 +104,7 @@ header i {
   padding: 0px 18px;
   box-shadow: 0 3px 4px 0 rgba(0,0,0,.14), 0 3px 3px -2px rgba(0,0,0,.12), 0 1px 8px 0 rgba(0,0,0,.2);
 /*   margin-bottom: 34px;*/
-  width: 25%; 
+  width: 25%;
   margin-right: auto;
   /*margin-right: 50px;*/
 /*   padding: 60px 18px; */
@@ -149,10 +149,10 @@ li {
   width: 250px;
   list-style-type: none;
   margin-right: 50px;
-  /* background-color: rgb(237, 237, 237); */
+  background-color: rgba(237, 237, 237, .8);
   border: 1px solid white;
   border-radius: 2px;
-  color: #fff;
+  color: #000;
   font-family: "Krub";
   font-weight:100;
   margin-bottom: 30px;
