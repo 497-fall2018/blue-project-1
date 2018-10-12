@@ -1,0 +1,9 @@
+node_modules/
+yarn-error.log*
+yarn.lock
+*.zip
+
+# Editor directories and files
+.vscode
+debug.log
+package-lock.json

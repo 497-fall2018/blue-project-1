@@ -103,8 +103,8 @@ header i {
   /* background-color: rgb(237, 237, 237); */
   padding: 0px 18px;
   box-shadow: 0 3px 4px 0 rgba(0,0,0,.14), 0 3px 3px -2px rgba(0,0,0,.12), 0 1px 8px 0 rgba(0,0,0,.2);
-/*   margin-bottom: 34px;
-  width: 25%; */
+/*   margin-bottom: 34px;*/
+  width: 25%; 
   margin-right: auto;
   /*margin-right: 50px;*/
 /*   padding: 60px 18px; */
@@ -146,7 +146,7 @@ ul {
 }
 
 li {
-  width: 15em;
+  width: 250px;
   list-style-type: none;
   margin-right: 50px;
   /* background-color: rgb(237, 237, 237); */
@@ -195,7 +195,9 @@ button {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
   padding: 10px 6px;
 }
-
+ .btn-group{
+   margin-bottom: 17px;
+ }
 h4{
   color: white;
   font-family: "Krub";
@@ -209,15 +211,24 @@ h4{
 
 @media all and (max-width: 840px) {
   /* We tell both sidebars to share a row */
+  .add-item {
+    width: 80%;
+    margin: auto;
+    margin-bottom: 2em;
+  }
   ul {  justify-content: space-around;  }
   li {  width: 100%;
         margin: 0 0 30px 0; }
   .display-item {
-    width: 80%;
+    width: 250px;
     margin: 0;
   }
-  header {
+  header h1 {
     padding: 10px;
+    font-size: 33px;
+  }
+  body{
+    background-repeat: repeat;
   }
 }
 
